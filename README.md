@@ -11,17 +11,17 @@ To run the application:
 2) When prompted, enter the full file path to the source CSV file for the SQLite database. If the file path provided is incorrect, the user will be prompted to enter a correct file path.
 
 3) The application will run and complete the following steps:
-    a) Read in the source file's header and check that it is properly formatted.
-    b) Create a directory named <source-filename> in the same directory as the source file. If such a directory already 
+   a) Read in the source file's header and check that it is properly formatted.
+   b) Create a directory named <source-filename> in the same directory as the source file. If such a directory already 
         exists, the directory name will be indexed with the first positive integer for which such a directory does not 
         already exist.
-    c) Create a database named <source-filename>.db in the above directory.
-    d) Create a table named <source-filename> in the new database using the source file's header.
-    e) Create a CSV file named <source-filename>-bad.csv in the above directory with the same header as the source file.
-    f) Validate each line of the source file inserting the complete records into <source-filename>.db and copying the
+   c) Create a database named <source-filename>.db in the above directory.
+   d) Create a table named <source-filename> in the new database using the source file's header.
+   e) Create a CSV file named <source-filename>-bad.csv in the above directory with the same header as the source file.
+   f) Validate each line of the source file inserting the complete records into <source-filename>.db and copying the
         incomplete records to <source-filename>-bad.csv.
-    g) Close the database.
-    h) Create a log file named <source-filename>.log in the above directory with the # of records received, successful, and
+   g) Close the database.
+   h) Create a log file named <source-filename>.log in the above directory with the # of records received, successful, and
         failed
 
 This application was designed to provided additional flexibility. It can be run on a file with more or less than 10 columns.
@@ -30,11 +30,11 @@ It trims whitespace around entries (excepting the double quoted entry), and has 
 This application assumes that:
   1) if a valid file path is provided, then the file path leads to a CSV file
   2) a properly formatted CSV file has:
-      a) a header as its first line
-      b) records separated by newlines with entries separated by commas
-      c) records that should contain exactly one entry contained in double quotations where:
-          i) the double quoted entry is not the first or last entry
-          ii) there is no whitespace between commas and double quotations
+     a) a header as its first line
+     b) records separated by newlines with entries separated by commas
+     c) records that should contain exactly one entry contained in double quotations where:
+        i) the double quoted entry is not the first or last entry
+        ii) there is no whitespace between commas and double quotations
           
 
 This program was written in Eclipse version 2019-06 (4.12.0) utilizing
