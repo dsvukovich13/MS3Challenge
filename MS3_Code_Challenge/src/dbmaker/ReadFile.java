@@ -1,3 +1,8 @@
+package dbmaker;
+
+import java.io.File;
+import java.util.Scanner;
+
 /* Title: File Reader Class
  * Author: Devon Vukovich
  * Email: dsvukovich13@gmail.com
@@ -11,11 +16,6 @@
  * 
  * Last Updated: Oct 11, 2019
  */
-
-package dbmaker;
-
-import java.io.File;
-import java.util.Scanner;
 
 public class ReadFile {
 	

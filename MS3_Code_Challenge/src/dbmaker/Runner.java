@@ -13,7 +13,6 @@ public class Runner {
 		
 		DBMaker runner = new DBMaker();
 		runner.run();
-
 	}
 
 }

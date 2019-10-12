@@ -1,3 +1,13 @@
+package dbmaker;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.File;
+import dbmaker.BlankEntryException;
+import dbmaker.ReadFile;
+import dbmaker.WriteFile;
+import dbmaker.DBTools;
+
 /* Title: Database Maker Class
  * Author: Devon Vukovich
  * Email: dsvukovich13@gmail.com
@@ -12,17 +22,6 @@
  * -write a .log file with # of records received, successful and failed
  * -run the complete .csv to SQLite database process
  */
-
-
-package dbmaker;
-
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import dbmaker.BlankEntryException;
-import dbmaker.ReadFile;
-import dbmaker.WriteFile;
-import dbmaker.DBTools;
 
 public class DBMaker {
 	
@@ -43,44 +42,6 @@ public class DBMaker {
 		
 	}
 	
-	// Copies the good records from the CSV file into the database
-	public void copyFile() throws Exception {
-		
-		try {
-			Scanner scanner = new Scanner(file);
-			
-			//write the header line to the bad file
-			String header = scanner.nextLine();
-			writer.writetoFile(header);
-			
-			//count and check/convert each line
-			while (scanner.hasNextLine()) {
-				
-				recordCount ++;
-				String line = scanner.nextLine();
-				ArrayList<String> record = recordCheckConvert(line);
-				int entryCount = record.size();
-				
-				//count and insert each good record into the database
-				if (entryCount == columnCount) {
-					goodCount ++;
-					toolbox.insert(record);
-				}
-				//count and write each uncounted bad record to bad file
-				else if (entryCount != 0) {
-					badCount ++;
-					writer.writetoFile(line);
-				}	
-			}
-			
-			scanner.close();
-			
-		} catch (Exception e) {
-			throw e;
-		}
-		
-	}
-	
 	// Retrieve the string literal of line number x
 	public String getLineString(int x) {
 		
@@ -93,13 +54,10 @@ public class DBMaker {
 				line = scanner.nextLine();
 			}
 			
-			scanner.close();
-			
-			
+			scanner.close();	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		
 		return line;
 	}
 	
@@ -217,32 +175,66 @@ public class DBMaker {
 				recordArray.addAll(frontArray);
 				recordArray.add(quoteString);
 				recordArray.addAll(rearArray);
-				
-			} 
+			 
 			//if a blank entry is found, count the line and write in bad file
-			catch (BlankEntryException e) {
+			} catch (BlankEntryException e) {
 				badCount ++;
 				writer.writetoFile(recordLine);
-				//System.out.println("The record is missing at least one entry.");
 			}
-			
 		}
 		//if there is no quoted entry, count the line and write in bad file
 		else {
 			badCount ++;
 			writer.writetoFile(recordLine);
-			//System.out.println("The record is missing at least one entry.");
 		}
 		return recordArray;
 	}
 	
+	// Copies the good records from the CSV file into the database
+	public void copyFile() throws Exception {
+		
+		try {
+			Scanner scanner = new Scanner(file);
+			
+			//write the header line to the bad file
+			String header = scanner.nextLine();
+			writer.writetoFile(header);
+			
+			//count and check/convert each line
+			while (scanner.hasNextLine()) {
+				
+				recordCount ++;
+				String line = scanner.nextLine();
+				ArrayList<String> record = recordCheckConvert(line);
+				int entryCount = record.size();
+				
+				//count and insert each good record into the database
+				if (entryCount == columnCount) {
+					goodCount ++;
+					toolbox.insert(record);
+				}
+				//count and write each uncounted bad record to bad file
+				else if (entryCount != 0) {
+					badCount ++;
+					writer.writetoFile(line);
+				}	
+			}
+			
+			scanner.close();	
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public void makeLog () {
+		
 		writer.writetoFile(recordCount + " records received.");
 		writer.writetoFile(goodCount + " records successful.");
 		writer.writetoFile(badCount + " records failed.");
 	}
 	
 	public void run() {
+		
 		try {
 			reader = new ReadFile();
 			reader.setFilePath();

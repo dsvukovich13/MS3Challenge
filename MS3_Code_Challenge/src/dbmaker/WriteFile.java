@@ -1,3 +1,9 @@
+package dbmaker;
+
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.File;
+
 /* Title: File Writer Class
  * Author: Devon Vukovich
  * Email: dsvukovich13@gmail.com
@@ -9,18 +15,13 @@
  * Last Updated: Oct 11, 2019
  */
 
-package dbmaker;
-
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.File;
-
 public class WriteFile {
 	
 	private String filePath;
 	private boolean appendOn;
 	
 	public WriteFile(String path, boolean appendtoFile) {
+		
 		filePath = path;
 		appendOn = appendtoFile;
 	}

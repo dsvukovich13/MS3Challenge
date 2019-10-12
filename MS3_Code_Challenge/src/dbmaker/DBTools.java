@@ -1,3 +1,11 @@
+package dbmaker;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 /* Title: Database Toolbox
  * Author: Devon Vukovich
  * Email: dsvukovich13@gmail.com
@@ -11,15 +19,6 @@
  * Last Updated: Oct 11, 2019
  */
 
-package dbmaker;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
-
 public class DBTools {
 	
 	private Connection conn = null;
@@ -28,7 +27,6 @@ public class DBTools {
 	public DBTools (String path) throws Exception {
 			
 		connect (path);
-		
 	}
 	
 	public void connect(String name) throws SQLException {
@@ -94,6 +92,7 @@ public class DBTools {
 	}
 	
 	public void close() throws Exception {
+		
 		conn.close();
 	}
 }
